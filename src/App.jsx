@@ -1,13 +1,13 @@
 import Header from "./components/Header.jsx";
-import Sidebar from "./components/Sidebar.jsx";
-import PerkList from "./components/PerkList.jsx";
+import Roles from "./components/Roles.jsx";
 
 export default function App() {
   return (
     <>
       <Header />
-      <Sidebar />
-      <PerkList />
+      <main>
+        <Roles />
+      </main>
     </>
   );
 }
