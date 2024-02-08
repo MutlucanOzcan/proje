@@ -3,9 +3,11 @@ import RoleButtons from "./RoleButtons";
 import { SURVIVOR_PERKS } from "../surv-database.js";
 import { KILLER_PERKS } from "../killer-database.js";
 
-export default function Roles() {
+export default function Roles({ name }) {
   const [selectedRole, setSelectedRole] = useState("Please select a role.");
   const [selectedPerks, setSelectedPerks] = useState([]);
+  const [killerButtonClicked, setKillerButtonClicked] = useState(false);
+  const [killerName, setKillerName] = useState(name);
 
   function handleSelect(selectedButton) {
     setSelectedRole(selectedButton);
@@ -15,18 +17,52 @@ export default function Roles() {
     setSelectedPerks(selectedPerks);
   }
 
+  function handleKillerButtonClick() {
+    setKillerButtonClicked((editing) => !editing);
+  }
+
+  function handleKillerNameChange(event) {
+    //console.log(event);
+    setKillerName(event.target.value);
+  }
+
+  let killer = (
+    <h2 className="text-center underline uppercase font-mono text-4xl ">
+      {killerName}
+    </h2>
+  );
+
+  if (killerButtonClicked) {
+    killer = (
+      <div>
+        <input
+          type="text"
+          required
+          value={killerName}
+          onChange={handleKillerNameChange}
+        ></input>
+        <button onClick={() => handleKillerButtonClick()}>Save</button>
+      </div>
+    );
+  }
+
   return (
     <div>
       <ul className="grid grid-cols-2 justify-items-center">
-        <RoleButtons onSelect={() => handleSelect("survivor")}>
+        <RoleButtons onClick={() => handleSelect("survivor")}>
           Survivor
         </RoleButtons>
-        <RoleButtons onSelect={() => handleSelect("killer")}>
+        <RoleButtons
+          onClick={() => {
+            handleSelect("killer");
+            handleKillerButtonClick();
+          }}
+        >
           Killer
         </RoleButtons>
       </ul>
       <h2 className="text-center underline uppercase font-mono text-4xl ">
-        {selectedRole}
+        {selectedRole === "survivor" ? selectedRole : killer}
       </h2>
       <ul className="grid grid-cols-4 justify-items-center py-20">
         {selectedPerks.map((perk) => (
