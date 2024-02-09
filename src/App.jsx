@@ -6,7 +6,7 @@ export default function App() {
     <>
       <Header />
       <main>
-        <Roles name='Trapper' />
+        <Roles name="" />
       </main>
     </>
   );
