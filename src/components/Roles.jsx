@@ -6,11 +6,11 @@ import { KILLER_PERKS } from "../killer-database.js";
 const usedSurvivorPerks = [];
 const usedKillerPerks = [];
 
-export default function Roles({ name }) {
+export default function Roles({onSelectedRole}) {
   const [selectedRole, setSelectedRole] = useState("Please select a role.");
   const [selectedPerks, setSelectedPerks] = useState([]);
   const [killerButtonClicked, setKillerButtonClicked] = useState(false);
-  const [killerName, setKillerName] = useState(name);
+  const [killerName, setKillerName] = useState("");
 
   function handleSelect(selectedButton) {
     setSelectedRole(selectedButton);
@@ -94,7 +94,7 @@ export default function Roles({ name }) {
         ))}
       </ul>
       <hr className="mb-10"></hr>
-      <div className="inline-grid">
+      <div>
         <h3>Used Survivor Perks:</h3>
         <ul>
           {usedSurvivorPerks.map((perk) => (
@@ -103,6 +103,7 @@ export default function Roles({ name }) {
             </li>
           ))}
         </ul>
+
         <h3>Used Killer Perks:</h3>
         <ul>
           {usedKillerPerks.map((perk) => (
