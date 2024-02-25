@@ -6,8 +6,6 @@ import { KILLER_PERKS } from "../killer-database.js";
 export default function Roles({ onRole }) {
   const [selectedRole, setSelectedRole] = useState("Please select a role.");
   const [selectedPerks, setSelectedPerks] = useState([]);
-  const [killerButtonClicked, setKillerButtonClicked] = useState(false);
-  const [killerName, setKillerName] = useState("");
   const [usedSurvivorPerks, setUsedSurvivorPerks] = useState([]);
   const [usedKillerPerks, setUsedKillerPerks] = useState([]);
 
@@ -30,7 +28,6 @@ export default function Roles({ onRole }) {
   }
 
   function handleKillerButtonClick() {
-    setKillerButtonClicked((editing) => !editing);
     handleSelect("killer");
     onRole("killer");
     handleSavePerks();
