@@ -11,33 +11,33 @@ export default function Roles({ onRole }) {
   const [usedSurvivorPerks, setUsedSurvivorPerks] = useState([]);
   const [usedKillerPerks, setUsedKillerPerks] = useState([]);
 
-  function handleSelect(selectedButton) {
-    setSelectedRole(selectedButton);
-    const perks =
-      selectedButton === "survivor"
-        ? [setUsedSurvivorPerks[0], ...SURVIVOR_PERKS]
-        : [setUsedKillerPerks[0], ...KILLER_PERKS];
+  function generateRandomPerks(role) {
+    const perks = role === "survivor" ? SURVIVOR_PERKS : KILLER_PERKS;
     const shuffledPerks = perks.sort(() => 0.5 - Math.random());
-    const selectedPerks = shuffledPerks.slice(0, 4);
-    setSelectedPerks(selectedPerks);
+    const randomPerks = shuffledPerks.slice(0, 4);
+
+    return randomPerks;
   }
-  function handleSavePerks() {
-    if (selectedRole === "survivor") {
-      usedSurvivorPerks.push(...selectedPerks);
-    } else if (selectedRole === "killer") {
-      usedKillerPerks.push(...selectedPerks);
+
+  function handleSelect(role) {
+    setSelectedRole(role);
+    const randomPerks = generateRandomPerks(role);
+    setSelectedPerks(randomPerks);
+
+    if (role === "survivor") {
+      setUsedSurvivorPerks((prev) => [...prev, ...randomPerks]);
+    } else if (role === "killer") {
+      setUsedKillerPerks((prev) => [...prev, ...randomPerks]);
     }
   }
 
   function handleKillerButtonClick() {
     handleSelect("killer");
     onRole("killer");
-    handleSavePerks();
   }
   function handleSurvivorButtonClick() {
     handleSelect("survivor");
     onRole("survivor");
-    handleSavePerks();
   }
 
   return (
