@@ -2,6 +2,8 @@ import { useState } from "react";
 import RoleButtons from "./RoleButtons";
 import { SURVIVOR_PERKS } from "../surv-database.js";
 import { KILLER_PERKS } from "../killer-database.js";
+import UsedPerkList from "./UsedPerkList.jsx";
+import SelectedPerks from "./SelectedPerks.jsx";
 
 export default function Roles({ onRole }) {
   const [selectedRole, setSelectedRole] = useState("Please select a role.");
@@ -38,35 +40,6 @@ export default function Roles({ onRole }) {
     handleSavePerks();
   }
 
-  // function handleKillerNameChange(event) {
-  //   //console.log(event);
-  //   setKillerName(event.target.value);
-  // }
-
-  // let killer = (
-  //   <h2 className="text-center underline uppercase font-mono text-4xl ">
-  //     {killerName}
-  //   </h2>
-  // );
-
-  // if (killerButtonClicked) {
-  //   killer = (
-  //     <div>
-  //       <input
-  //         className="border mr-4 text-slate-300"
-  //         placeholder="Type Killer Name"
-  //         type="text"
-  //         required
-  //         value={killerName}
-  //         onChange={handleKillerNameChange}
-  //       ></input>
-  //       <button className="border" onClick={() => handleKillerButtonClick()}>
-  //         Save
-  //       </button>
-  //     </div>
-  //   );
-  // }
-
   return (
     <div>
       <ul className="grid grid-cols-2 justify-items-center">
@@ -77,37 +50,12 @@ export default function Roles({ onRole }) {
           Killer
         </RoleButtons>
       </ul>
-      {/* <h2 className="text-center underline uppercase font-mono text-4xl ">
-        {selectedRole === "survivor" ? selectedRole : killer}
-      </h2> */}
-      <ul className="grid grid-cols-4 justify-items-center py-20">
-        {selectedPerks.map((perk) => (
-          <li key={perk.id}>
-            <h3>{perk.name}</h3>
-            <p>{perk.description}</p>
-          </li>
-        ))}
-      </ul>
+      <SelectedPerks selectedPerks={selectedPerks} />
       <hr className="mb-10"></hr>
-      <div>
-        <h3>Used Survivor Perks:</h3>
-        <ul>
-          {usedSurvivorPerks.map((perk) => (
-            <li key={perk.id}>
-              <h3>{perk.name}</h3>
-            </li>
-          ))}
-        </ul>
-
-        <h3>Used Killer Perks:</h3>
-        <ul>
-          {usedKillerPerks.map((perk) => (
-            <li key={perk.id}>
-              <h3>{perk.name}</h3>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <UsedPerkList
+        usedKillerPerks={usedKillerPerks}
+        usedSurvivorPerks={usedSurvivorPerks}
+      />
     </div>
   );
 }
