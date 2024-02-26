@@ -4,15 +4,16 @@ import { SURVIVOR_PERKS } from "../surv-database.js";
 import { KILLER_PERKS } from "../killer-database.js";
 import UsedPerkList from "./UsedPerkList.jsx";
 import SelectedPerks from "./SelectedPerks.jsx";
+import { SELECTION_TYPE } from "../lib/helpers.js";
 
 export default function Roles({ onRole }) {
-  const [selectedRole, setSelectedRole] = useState("Please select a role.");
   const [selectedPerks, setSelectedPerks] = useState([]);
   const [usedSurvivorPerks, setUsedSurvivorPerks] = useState([]);
   const [usedKillerPerks, setUsedKillerPerks] = useState([]);
 
   function generateRandomPerks(role) {
-    const perks = role === "survivor" ? SURVIVOR_PERKS : KILLER_PERKS;
+    const perks =
+      role === SELECTION_TYPE.SURVIVOR ? SURVIVOR_PERKS : KILLER_PERKS;
     const shuffledPerks = perks.sort(() => 0.5 - Math.random());
     const randomPerks = shuffledPerks.slice(0, 4);
 
@@ -20,38 +21,30 @@ export default function Roles({ onRole }) {
   }
 
   function handleSelect(role) {
-    setSelectedRole(role);
+    console.log(role);
     const randomPerks = generateRandomPerks(role);
     setSelectedPerks(randomPerks);
 
-    if (role === "survivor") {
+    if (role === SELECTION_TYPE.SURVIVOR) {
       setUsedSurvivorPerks((prev) => [...prev, ...randomPerks]);
-    } else if (role === "killer") {
+    } else if (role === SELECTION_TYPE.KILLER) {
       setUsedKillerPerks((prev) => [...prev, ...randomPerks]);
     }
-  }
-
-  function handleKillerButtonClick() {
-    handleSelect("killer");
-    onRole("killer");
-  }
-  function handleSurvivorButtonClick() {
-    handleSelect("survivor");
-    onRole("survivor");
+    onRole(role);
   }
 
   return (
     <div>
       <ul className="grid grid-cols-2 justify-items-center">
-        <RoleButtons onClick={() => handleSurvivorButtonClick()}>
+        <RoleButtons onClick={() => handleSelect(SELECTION_TYPE.SURVIVOR)}>
           Survivor
         </RoleButtons>
-        <RoleButtons onClick={() => handleKillerButtonClick()}>
+        <RoleButtons onClick={() => handleSelect(SELECTION_TYPE.KILLER)}>
           Killer
         </RoleButtons>
       </ul>
       <SelectedPerks selectedPerks={selectedPerks} />
-      <hr className="mb-10"></hr>
+      <hr className="m-3"></hr>
       <UsedPerkList
         usedKillerPerks={usedKillerPerks}
         usedSurvivorPerks={usedSurvivorPerks}

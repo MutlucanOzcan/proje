@@ -1,5 +1,3 @@
-
-
 export default function UsedPerkList({ usedKillerPerks, usedSurvivorPerks }) {
   return (
     <div>
@@ -11,7 +9,7 @@ export default function UsedPerkList({ usedKillerPerks, usedSurvivorPerks }) {
           </li>
         ))}
       </ul>
-
+      <hr className="m-3"></hr>
       <h3>Used Killer Perks:</h3>
       <ul>
         {usedKillerPerks.map((perk) => (
