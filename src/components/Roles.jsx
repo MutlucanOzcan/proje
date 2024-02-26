@@ -11,6 +11,12 @@ export default function Roles({ onRole }) {
   const [usedSurvivorPerks, setUsedSurvivorPerks] = useState([]);
   const [usedKillerPerks, setUsedKillerPerks] = useState([]);
 
+  function handleRestart (){
+    setUsedKillerPerks([])
+    setUsedSurvivorPerks([])
+  }
+
+
   function generateRandomPerks(role) {
     const perks =
       role === SELECTION_TYPE.SURVIVOR ? SURVIVOR_PERKS : KILLER_PERKS;
@@ -48,6 +54,7 @@ export default function Roles({ onRole }) {
       <UsedPerkList
         usedKillerPerks={usedKillerPerks}
         usedSurvivorPerks={usedSurvivorPerks}
+        restart={handleRestart}
       />
     </div>
   );

@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { SELECTION_TYPE } from "../lib/helpers.js";
 
-export default function UsedPerkList({ usedKillerPerks, usedSurvivorPerks }) {
+export default function UsedPerkList({
+  usedKillerPerks,
+  usedSurvivorPerks,
+  restart,
+}) {
   const [color, setColor] = useState("text-yellow-400");
 
   function handleClick(result) {
@@ -14,6 +18,7 @@ export default function UsedPerkList({ usedKillerPerks, usedSurvivorPerks }) {
 
   return (
     <div>
+      <button onClick={restart}>Reset Used Perks</button>
       <h2>Used Survivor Perks:</h2>
       <ul>
         {usedSurvivorPerks.map((perk, index) => (
@@ -38,7 +43,7 @@ export default function UsedPerkList({ usedKillerPerks, usedSurvivorPerks }) {
       <ul>
         {usedKillerPerks.map((perk, index) => (
           <li key={perk.id}>
-            <p>{perk.name}</p>
+            <p className={color}>{perk.name}</p>
             {index % 4 === 3 && ( // Her 4 perk için bir grup buton oluştur
               <div>
                 <button onClick={() => handleClick(SELECTION_TYPE.ESCAPED)}>
