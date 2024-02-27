@@ -1,10 +1,10 @@
 import { useState } from "react";
-import RoleButtons from "./RoleButtons";
 import { SURVIVOR_PERKS } from "../surv-database.js";
 import { KILLER_PERKS } from "../killer-database.js";
+import { SELECTION_TYPE } from "../lib/helpers.js";
+import RoleButtons from "./RoleButtons";
 import UsedPerkList from "./UsedPerkList.jsx";
 import SelectedPerks from "./SelectedPerks.jsx";
-import { SELECTION_TYPE } from "../lib/helpers.js";
 
 export default function Roles({ onRole }) {
   const [selectedPerks, setSelectedPerks] = useState([]);
