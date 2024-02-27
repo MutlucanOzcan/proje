@@ -30,11 +30,10 @@ export default function Roles({ onRole }) {
     const randomPerks = generateRandomPerks(role);
     setSelectedPerks(randomPerks);
 
-    if (role === SELECTION_TYPE.SURVIVOR) {
-      setSurvivorPerks((prev) => [...prev, ...randomPerks]);
-    } else if (role === SELECTION_TYPE.KILLER) {
-      setKillerPerks((prev) => [...prev, ...randomPerks]);
-    }
+    role === SELECTION_TYPE.SURVIVOR
+      ? setSurvivorPerks((prev) => [...prev, ...randomPerks])
+      : setKillerPerks((prev) => [...prev, ...randomPerks]);
+
     onRole(role);
   }
 

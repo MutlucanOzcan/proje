@@ -4,11 +4,6 @@ import { SELECTION_TYPE } from "../lib/helpers.js";
 export default function UsedSurvivorPerks({ perks }) {
   const [color, setColor] = useState("text-yellow-400");
   function handleResult(result) {
-    // if (result === SELECTION_TYPE.ESCAPED) {
-    //   setColor("text-lime-500");
-    // } else if (result === SELECTION_TYPE.SACRIFIED) {
-    //   setColor("text-red-700");
-    // }
     result === SELECTION_TYPE.ESCAPED
       ? setColor("text-lime-500")
       : setColor("text-red-700");
