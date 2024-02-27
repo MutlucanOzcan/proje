@@ -8,14 +8,13 @@ import { SELECTION_TYPE } from "../lib/helpers.js";
 
 export default function Roles({ onRole }) {
   const [selectedPerks, setSelectedPerks] = useState([]);
-  const [usedSurvivorPerks, setUsedSurvivorPerks] = useState([]);
-  const [usedKillerPerks, setUsedKillerPerks] = useState([]);
+  const [survivorPerks, setSurvivorPerks] = useState([]);
+  const [killerPerks, setKillerPerks] = useState([]);
 
-  function handleRestart (){
-    setUsedKillerPerks([])
-    setUsedSurvivorPerks([])
+  function handleRestart() {
+    setKillerPerks([]);
+    setSurvivorPerks([]);
   }
-
 
   function generateRandomPerks(role) {
     const perks =
@@ -32,9 +31,9 @@ export default function Roles({ onRole }) {
     setSelectedPerks(randomPerks);
 
     if (role === SELECTION_TYPE.SURVIVOR) {
-      setUsedSurvivorPerks((prev) => [...prev, ...randomPerks]);
+      setSurvivorPerks((prev) => [...prev, ...randomPerks]);
     } else if (role === SELECTION_TYPE.KILLER) {
-      setUsedKillerPerks((prev) => [...prev, ...randomPerks]);
+      setKillerPerks((prev) => [...prev, ...randomPerks]);
     }
     onRole(role);
   }
@@ -49,11 +48,11 @@ export default function Roles({ onRole }) {
           Killer
         </RoleButtons>
       </ul>
-      <SelectedPerks selectedPerks={selectedPerks} />
+      <SelectedPerks pickedPerks={selectedPerks} />
       <hr className="m-3"></hr>
       <UsedPerkList
-        usedKillerPerks={usedKillerPerks}
-        usedSurvivorPerks={usedSurvivorPerks}
+        killerPerks={killerPerks}
+        survivorPerks={survivorPerks}
         restart={handleRestart}
       />
     </div>
