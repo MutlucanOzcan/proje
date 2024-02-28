@@ -46,7 +46,6 @@ export default function Roles({ onRole }) {
         </RoleButtons>
       </ul>
       <SelectedPerks pickedPerks={selectedPerks} />
-
       <hr className="m-3"></hr>
       <UsedPerkList
         killerPerks={killerPerks}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SELECTION_TYPE } from "../lib/helpers.js";
 
 export default function UsedSurvivorPerks({ perks }) {
+  console.log(perks);
   const [color, setColor] = useState("text-yellow-400");
   function handleResult(result) {
     result === SELECTION_TYPE.ESCAPED
@@ -13,7 +14,7 @@ export default function UsedSurvivorPerks({ perks }) {
       <h2>Used Survivor Perks:</h2>
       <ul>
         {perks.map((perk, index) => (
-          <li key={perk.id}>
+          <li key={index}>
             <p className={color}>{perk.name}</p>
             {index % 4 === 3 && ( // Her 4 perk için bir grup buton oluştur
               <div>

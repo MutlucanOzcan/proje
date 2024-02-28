@@ -13,7 +13,7 @@ export default function UsedKillerPerks({ perks }) {
       <h2>Used Killer Perks:</h2>
       <ul>
         {perks.map((perk, index) => (
-          <li key={perk.id}>
+          <li key={index}>
             <p className={color}>{perk.name}</p>
             {index % 4 === 3 && ( // Her 4 perk için bir grup buton oluştur
               <div>
