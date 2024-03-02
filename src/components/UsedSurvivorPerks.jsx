@@ -13,21 +13,25 @@ export default function UsedSurvivorPerks({ perks }) {
     <div>
       <h2>Used Survivor Perks:</h2>
       <ul>
-        {perks.map((perk, index) => (
-          <li key={index}>
-            <p className={color}>{perk.name}</p>
-            {index % 4 === 3 && ( // Her 4 perk için bir grup buton oluştur
-              <div>
-                <button onClick={() => handleResult(SELECTION_TYPE.ESCAPED)}>
-                  Escaped
-                </button>
-                <button onClick={() => handleResult(SELECTION_TYPE.SACRIFIED)}>
-                  Sacrified
-                </button>
-              </div>
-            )}
-          </li>
-        ))}
+        <div className="flex justify-center items-center">
+          {perks.map((perk, index) => (
+            <li key={index}>
+              <p className={color}>{perk.name}</p>
+              {index % 4 === 3 && ( // Her 4 perk için bir grup buton oluştur
+                <div>
+                  <button onClick={() => handleResult(SELECTION_TYPE.ESCAPED)}>
+                    Escaped
+                  </button>
+                  <button
+                    onClick={() => handleResult(SELECTION_TYPE.SACRIFIED)}
+                  >
+                    Sacrified
+                  </button>
+                </div>
+              )}
+            </li>
+          ))}
+        </div>
       </ul>
     </div>
   );

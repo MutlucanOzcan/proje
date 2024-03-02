@@ -21,12 +21,15 @@ export default function Roles({ onRole }) {
       role === SELECTION_TYPE.SURVIVOR ? SURVIVOR_PERKS : KILLER_PERKS;
     const shuffledPerks = perks.sort(() => 0.5 - Math.random());
     const randomPerks = shuffledPerks.slice(0, 4);
+    console.log("generate içindeki:  " + randomPerks);
     return randomPerks;
   }
 
   function handleSelect(role) {
     console.log(role);
     const randomPerks = generateRandomPerks(role);
+    console.log("handle select içindeki:  " + randomPerks);
+
     role === SELECTION_TYPE.SURVIVOR
       ? setSurvivorPerks((prev) => [...prev, ...randomPerks])
       : setKillerPerks((prev) => [...prev, ...randomPerks]);

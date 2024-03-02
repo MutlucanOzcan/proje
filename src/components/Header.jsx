@@ -2,7 +2,7 @@
 
 export default function Header() {
   return (
-    <header class="flex h-20">
+    <header class="flex h-20 mt-10 ">
       <img
         src="dbd-logo.png"
         alt="dead by daylight logo"
